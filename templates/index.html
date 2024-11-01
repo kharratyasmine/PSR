@@ -1,0 +1,120 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telnet</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo2.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='logo2.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <a href="/"><img src="https://groupe-telnet.com/wp-content/uploads/2020/03/logo.png" alt="#"></a>
+    <hr>
+    <!-- File upload section -->
+    <div class="sub">
+        <h3>Upload Excel Files</h3>
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file-input">Choose files</label>
+                <input type="file" class="form-control-file" id="file-input" name="files" multiple>
+            </div>
+            <button type="submit" class="btn btn-success">Upload</button>
+        </form>
+        <p id="message"></p>
+    </div>
+    <!-- Export data section -->
+    <div class="sub">
+        <h3>Export Data</h3>
+        <button id="export-btn" class="btn btn-info">Export Holidays</button>
+    </div>
+
+    <!-- Display uploaded files -->
+    <div class="mb-4">
+        <h3>Uploaded Files</h3>
+        <table id="uploaded-files-table">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Upload Date</th>
+                    <th>Download</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="uploaded-files-body">
+                {% for file in files %}
+                <tr>
+                    <td>{{ file.filename }}</td>
+                    <td>{{ file.uploaded_at }}</td>
+                    <td><a href="{{ url_for('download_upload', filename=file.filename) }}" download>Download</a>
+                    <td>
+                        <button id="deletebtn" class="btn btn-danger btn-sm delete-file"
+                            data-filename="{{ file.filename }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Display exported files -->
+    <div class="mb-4">
+        <h3>Exported Files</h3>
+        <table id="exported-files-table">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Creation Date</th>
+                    <th>Download</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="exported-files-body">
+                {% for file in exported_files %}
+                <tr>
+                    <td>{{ file.filename }}</td>
+                    <td>{{ file.created_at }}</td>
+                    <td><a href="{{ url_for('download_file', filename=file.filename) }}" download>Download</a></td>
+                    <td>
+                        <button id="deletebtn" class="btn btn-danger btn-sm delete-export" data-filename="{{ file.filename }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Add a new public holiday -->
+    <div class="mb-4">
+        <h3>Add Public Holiday</h3>
+        <form id="add-holiday-form">
+            <label for="holiday_name">Holiday Name: </label>&nbsp;&nbsp;
+            <input type="text" id="holiday_name" name="holiday_name" required>&nbsp;&nbsp;
+            <label for="holiday_date">Date (DD/MM): </label>&nbsp;&nbsp;
+            <input type="text" id="holiday_date" name="holiday_date" required>&nbsp;&nbsp;
+            <button type="submit">Add Holiday</button>
+        </form>
+    </div>
+
+    <!-- Display public holidays -->
+    <div class="mb-4">
+        <h3>Public Holidays</h3>
+        <ul id="public-holidays-list" class="list-group">
+            {% for holiday in public_holidays %}
+            <li class="list-group-item">
+                {{ holiday.name }} ({{ holiday.date }})&nbsp;&nbsp;
+                <button id="deletebtn" class="btn btn-danger btn-sm delete-holiday" data-date="{{ holiday.date }}"
+                    data-name="{{ holiday.name }}">Delete</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

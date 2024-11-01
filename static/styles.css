@@ -1,0 +1,96 @@
+/* static/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1,
+h2 {
+    color: #1e1666;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #23A3D9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: medium;
+}
+
+button:hover {
+    background-color: #23A3D9;
+}
+
+#upload-form {
+    display: flex;
+    align-items: center;
+}
+
+#add-holiday-form {
+    display: flex;
+    align-items: center;
+}
+
+#file-input {
+    margin-right: 10px;
+}
+
+.list-group-item {
+    background-color: #f0f0f0;
+
+}
+
+#deletebtn {
+    border: 2px solid black;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-color: #f44336;
+    border-radius: 12px;
+    color: red;
+}
+
+.list-group-item {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#deletebtn:hover {
+    background: #f44336;
+    color: white;
+}
